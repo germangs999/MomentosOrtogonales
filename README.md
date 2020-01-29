@@ -67,3 +67,16 @@ donde ***Bk(x)*** es el polinomio de Bernoulli y ***Bk(0)*** es el número de Be
 
 <img src="https://latex.codecogs.com/gif.latex?h_p&space;(n,N)&space;=&space;\sum_{i=0}^{p}&space;(-1)^i&space;\frac{M_{(i&plus;1),1}^{(p)}&space;(N)}{\vert&space;H_p&space;(N)&space;\vert}&space;n^i." title="h_p (n,N) = \sum_{i=0}^{p} (-1)^i \frac{M_{(i+1),1}^{(p)} (N)}{\vert H_p (N) \vert} n^i." />
 
+## Descripción de textura con momentos ortogonales discretos
+
+La base polinomial actúa como el filtro en la descripción basada con Momentos Ortogonales Discretos. EL valor del momento es mayor si las variaciones son similares a los valores de la base polinomial en las direcciones X y Y. Esta característica es importante para el análisis de textura porque la textura es definida como la repetición espacial de patrones en escala de gris en una región dentro de la imagen. Por lo tanto, es posible obtener una descripción de la textura cuando el momento de orden ***s*** es evaluado. La descripción está relacionada con las respuestas en frecuencia de la base polinomial. Entonces, las características de textura ***M(s)*** basada en momentos ortogonales discretos se calcula de la siguiente manera:
+
+<img src="https://latex.codecogs.com/gif.latex?M(s)&space;=&space;\sum_{s=m&plus;n}&space;|H_{mn}|,&space;\text{&space;con&space;}&space;s=0,1,&space;\ldots,&space;2N-2." title="M(s) = \sum_{s=m+n} |H_{mn}|, \text{ con } s=0,1, \ldots, 2N-1." />
+
+El cálculo de los polinomios ortogonales discretos es susceptible a la inestabilidad numérica conforme el orden aumenta. Es por ello, que se propone utilizar una descripción basada en ventanas cuadradas traslapadas que recorren la imagen, y así evitar el cálculo de polinomios y momentos de orden alto para mantener la estabilidad numérica de la descripción. Resulta evidente que el uso de las ventanas traslapadas genera una sobredescricpión de la imagen, por eso se calcula el promedio, la desviación estándar y la curtosis de los vectores obtenidos de todas las ventanas de cada imagen.
+
+El vector estadístico de textura ***t***, basado en la descripción de textura ***M(s)***, es calculado para cada ventana donde ***i*** es la posición de la ventana, que se desplaza de izquierda a derecha y de arriba hacia abajo. El vector ***t*** se contruye de la siguiente manera:
+
+<img src="https://latex.codecogs.com/gif.latex?t&space;=&space;\left[&space;\mu(M_i(0)),&space;\sigma(M_i(0)),&space;\kappa&space;(M_i(0)),&space;\ldots,&space;\mu(M_i(2N-2)),&space;\sigma(M_i(2N-2)),&space;\kappa&space;(M_i(2N-2))&space;\right]," title="t = \left[ \mu(M_i(0)), \sigma(M_i(0)), \kappa (M_i(0)), \ldots, \mu(M_i(2N-2)), \sigma(M_i(2N-2)), \kappa (M_i(2N-2)) \right]," />
+
+El esquema general  de clasificación indica que se calcula una firma estadística de textura para cada imagen del conjunto de entrenamiento. Una vez calculadas las características, entran al clasificador, que se encargará de generar una regla con la que posteriormente las características calculadas para el conjunto de validación serán clasificadas. En la Figura \ref{texturaestadisticas} se muestra el esquema general de la clasificación con firmas de textura estadísticas. 
