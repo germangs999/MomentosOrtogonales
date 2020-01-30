@@ -79,8 +79,51 @@ El vector estadístico de textura ***t***, basado en la descripción de textura 
 
 <img src="https://latex.codecogs.com/gif.latex?t&space;=&space;\left[&space;\mu(M_i(0)),&space;\sigma(M_i(0)),&space;\kappa&space;(M_i(0)),&space;\ldots,&space;\mu(M_i(2N-2)),&space;\sigma(M_i(2N-2)),&space;\kappa&space;(M_i(2N-2))&space;\right]," title="t = \left[ \mu(M_i(0)), \sigma(M_i(0)), \kappa (M_i(0)), \ldots, \mu(M_i(2N-2)), \sigma(M_i(2N-2)), \kappa (M_i(2N-2)) \right]," />
 
-El esquema general  de clasificación indica que se calcula una firma estadística de textura para cada imagen del conjunto de entrenamiento. Una vez calculadas las características, entran al clasificador que se encargará de generar una regla con la que posteriormente las características calculadas para el conjunto de validación serán clasificadas. En la 
+El esquema general  de clasificación indica que se calcula una firma estadística de textura para cada imagen del conjunto de entrenamiento. Una vez calculadas las características, entran al clasificador que se encargará de generar una regla con la que posteriormente las características calculadas para el conjunto de validación serán clasificadas. En la siguiente figura se muestra el esquema general de la clasificación con firmas de textura estadísticas. 
 
-![Figura] (images/texturaestadisticas.png) 
+![](images/texturaestadisticas.png) 
 
-se muestra el esquema general de la clasificación con firmas de textura estadísticas. 
+# Aplicación: Clasificación de Lymphoma
+
+## Bases de datos
+
+La base de datos de prueba se llama ***Lymphoma*** y pertenece al benchmark [IICBU-2008](https://ome.grc.nia.nih.gov/iicbu2008/). Esta base de datos está compuesta por tres tipos de enfermedades hematológicas:
+
+ - **Leucemia linfocítica crónica (CLL)** con 133 muestras. 
+ - **Linfoma folicular (FL)** con 139 muestras.
+ - **Linfoma de células del manto (MCL)** con 122 muestras.
+
+La siguiente figura contiene muestras de cada clase de la base de datos.
+
+![Clases de la base de datos Lymphoma: (a)CLL, (b)FL y (c)MCL.](images/hematologic1.png)
+
+## Descripción de los programas
+
+### Cálculo de los vectores de características de textura
+El programa llamado **MomSTKDLymphoma.m** se encarga de generar los vectores de características de textura de cada ventana y, para cada base polinomial, los almacena en los siguientes archivos:
+ - **Lymphoma_TchebiMomentos.mat**
+ - **Lymphoma_KrawtMomentos.mat**
+ - **Lymphoma_DHahnMomentos.mat**
+ - **Lymphoma_ShmaliyMomentos.mat**
+ 
+### Cálculo de los vectores estadísticos de textura
+Después de calcular los vectores de textura de cada ventana, en el programa **Caracteristicas_STKD_Lymphoma.m** se agruparán en 7 diferentes grupos o combinaciones basados en el promedio, desviación estándar y curtosis, es decir, se concatenarán dichos vectores para formar distintos vectores estadísticos de textura:
+
+ 1. **Promedio, desviación estándar y curtosis.**
+ 2. **Promedio y desviación estándar.**
+ 3. **Promedio y curtosis.**
+ 4. **Desviación estándar y curtosis.**
+ 5. **Promedio.**
+ 6. **Desviación estándar.**
+ 7. **Curtosis.**
+ 
+Estos vectores estadísticos de características se calculan para cada base polinomial y se almacenan en los archivos:
+
+ -**Lymphoma_CaracteristicasS.mat**
+ -**Lymphoma_CaracteristicasT.mat**
+ -**Lymphoma_CaracteristicasK.mat**
+ -**Lymphoma_CaracteristicasD.mat**
+ 
+ ### Clasificación de la base de datos
+ 
+ 
