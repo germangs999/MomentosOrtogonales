@@ -119,10 +119,10 @@ Después de calcular los vectores de textura de cada ventana, en el programa **C
  
 Estos vectores estadísticos de características se calculan para cada base polinomial y se almacenan en los archivos:
 
- -**Lymphoma_CaracteristicasS.mat**
- -**Lymphoma_CaracteristicasT.mat**
- -**Lymphoma_CaracteristicasK.mat**
- -**Lymphoma_CaracteristicasD.mat**
+ - **Lymphoma_CaracteristicasS.mat**
+ - **Lymphoma_CaracteristicasT.mat**
+ - **Lymphoma_CaracteristicasK.mat**
+ - **Lymphoma_CaracteristicasD.mat**
  
  ### Clasificación de la base de datos
  
