@@ -126,4 +126,15 @@ Estos vectores estadísticos de características se calculan para cada base poli
  
  ### Clasificación de la base de datos
  
+ Una vez que tenemos los vectores estadísticos, ahora hay que entrenar a un clasificador para su posterior evaluación. La validación será a través del esquema **validación cruzada de 5 grupos** y la métrica selecciona para validar el rendimiento del esquema de clasificación es el *Accuracy* (Exactitud), que se obtiene a partir del promedio de la validación de cada grupo. En resumen, estos son los parámetros variables utilizados para este experimento:
+ 
+ - **Familias de Momentos Discretos:** Los vectores característicos de textura  se calculan a partir de las bases polinomiales discretas de Shmaliy, Tchebichef, Krawtchouk y dual Hahn.
+
+ - **Tamaño de ventana de análisis:** los tamaños de las ventanas de análisis para calcular las firmas estadísticas de textura son 20x20, 30x30, 40x40 y 50x50 pixeles. Este tamaño está limitado por que el cálculo de los polinomios dual Hahn es inestable a partir de ese tamaño. Esa inestabilidad se debe a la acumulación del error en las recursiones, tal y como se mencionó anteriormente. Por lo tanto, el tamaño de la ventana se limita para todas las familias de polinomios para comparar los resultados de las cuatro bases polinomiales bajo las mismas condiciones.
+
+ - **Procesamiento de las firmas de textura:** Antes de que las firmas de textura estadística entren a los clasificadores se les aplica el siguiente tratamiento: Análisis Discriminante Lineal (*LDA*), eliminación recursiva de caracterísiticas y la combinación de ambas, eliminación recursiva y *LDA*. Evidentemente, las pruebas también se realizaron sobre las firmas estadísticas sin tratamiento alguno.
+
+ - **Clasificadores:** Los algoritmos de clasificación utilizados son: $K$ vecinos más cercanos (*kNN*), máquina de soporte vectorial con kernel lineal (*SVM* lineal) y con kernel Gaussiano (*SVM* gauss), *Random Forest* y *naive* Bayes.
+
+
  
