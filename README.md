@@ -93,7 +93,7 @@ La base de datos de prueba se llama ***Lymphoma*** y pertenece al benchmark [IIC
  - **Linfoma folicular (FL)** con 139 muestras.
  - **Linfoma de células del manto (MCL)** con 122 muestras.
 
-La siguiente figura contiene muestras de cada clase de la base de datos. Cabe resaltar que las imágenes originales fueron escaladas a la mitad y transformadas a escala de grises. La base de datos se puede descargar en el siguiente [enlace](https://mega.nz/#!pxxlGShS!NXQEW3HHNmtWP9jkcnwhmmYVR7-tBSrjDCdEM6W5Lds).
+La siguiente figura contiene muestras de cada clase de la base de datos. Cabe resaltar que las imágenes originales fueron escaladas a la mitad y transformadas a escala de grises. **La base de datos se puede descargar en el siguiente [enlace](https://mega.nz/#!pxxlGShS!NXQEW3HHNmtWP9jkcnwhmmYVR7-tBSrjDCdEM6W5Lds).**
 
 ![Clases de la base de datos Lymphoma: (a)CLL, (b)FL y (c)MCL.](images/hematologic1.png)
 
