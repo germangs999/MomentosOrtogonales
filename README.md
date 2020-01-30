@@ -1,5 +1,5 @@
 # Aplicaciones de los Momentos Ortogonales
-En esta carpeta se incluye un ejemplo de cómo utilizar diferentes familias de momentos ortogonales discretos como descriptores de textura en imágenes. Con dichos descriptores se generarán vectores de características que funcionarán para realizar la clasificación de imágenes dentro de una base de datos.
+En esta carpeta se incluye un ejemplo de cómo utilizar diferentes familias de momentos ortogonales discretos como descriptores de textura en imágenes. Con dichos descriptores se generarán vectores de características que funcionarán para realizar la clasificación de imágenes dentro de una base de datos. Este trabajo fue publicado con el título [*A Comparative Study on Discrete Shmaliy Moments and Their Texture-Based Applications*](https://www.hindawi.com/journals/mpe/2018/1673283/) y en la Tesis Doctoral [*Descripción y clasificación de texturas basada en polinomios ortogonales discretos.*](http://132.248.9.195/ptd2018/septiembre/0780559/Index.html)
 
 ## Momentos ortogonales discretos
 Los momentos discretos son cantidades escalares que se usan para caracterizar una función (imagen) a través del cálculo de atributos significativos de ella. Matemáticamente, el momento Mpq de una Imagen ***I(x,y)*** es la proyección de la imagen sobre una base polinomial bidimensional ***r_pq*** y se define como:
@@ -93,7 +93,7 @@ La base de datos de prueba se llama ***Lymphoma*** y pertenece al benchmark [IIC
  - **Linfoma folicular (FL)** con 139 muestras.
  - **Linfoma de células del manto (MCL)** con 122 muestras.
 
-La siguiente figura contiene muestras de cada clase de la base de datos.
+La siguiente figura contiene muestras de cada clase de la base de datos. Cabe resaltar que las imágenes originales fueron escaladas a la mitad y transformadas a escala de grises.
 
 ![Clases de la base de datos Lymphoma: (a)CLL, (b)FL y (c)MCL.](images/hematologic1.png)
 
@@ -144,4 +144,17 @@ El procesamiento de las firmas y clasificación se puede encontrar en los siguie
  - **ClasificacionLDAFinal_Lymphoma_ver2.py:** clasifica las firmas de cada base polinomial selección de características.
  - **ClasificacionLDASelCarRFFinal_Lymphoma_ver2.py:** clasifica las firmas de cada base polinomial con selección de características y *LDA*.
 
- 
+ Los resultados son almacenados en formato ***.mat*** para visualizarlos en MATLAB y los podemos encontrar en los archivos:
+  - Para Shmaliy: **ResultadosS_Lymphoma, ResultadosS_LDA_Lymphoma, ResultadosS_SelCarRF_Lymphoma** y **ResultadosS_LDA_SelCarRF_Lymphoma**.
+  - Para Tchebichef: **ResultadosT_Lymphoma, ResultadosT_LDA_Lymphoma, ResultadosT_SelCarRF_Lymphoma** y **ResultadosT_LDA_SelCarRF_Lymphoma**.
+  - Para Krawtchouk: **ResultadosK_Lymphoma, ResultadosK_LDA_Lymphoma, ResultadosK_SelCarRF_Lymphoma** y **ResultadosK_LDA_SelCarRF_Lymphoma**.
+  - Para dual Hahn: **ResultadosD_Lymphoma, ResultadosD_LDA_Lymphoma, ResultadosD_SelCarRF_Lymphoma** y **ResultadosD_LDA_SelCarRF_Lymphoma**.
+  
+Puesto que son muchos resultados para mostrar, se límita a trabajar sólo con los vectores promedio, es decir, la opción 5 de vectores estadísticos. Además, se elige el mejor procesamiento de los vectores estadísticos con base en la siguiente gráfica:
+
+![Resultados promedio de exactitud en la clasificación de las familias de momentos en comparación con el tipo de procesamiento](images/ProcVentana.png)
+
+Se observa que el **Análisis Discriminante Lineal** es el mejor tipo de procesamiento. En la siguiente figura se observa que los mejores resultados se obtienen con ventanas mayores que 40x40.
+
+![](images/LymphomaFinalCUT.png)
+  
