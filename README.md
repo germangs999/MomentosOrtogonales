@@ -69,17 +69,17 @@ donde ***Bk(x)*** es el polinomio de Bernoulli y ***Bk(0)*** es el número de Be
 
 ## Descripción de textura con momentos ortogonales discretos
 
-La base polinomial actúa como el filtro en la descripción basada con Momentos Ortogonales Discretos. EL valor del momento es mayor si las variaciones son similares a los valores de la base polinomial en las direcciones X y Y. Esta característica es importante para el análisis de textura porque la textura es definida como la repetición espacial de patrones en escala de gris en una región dentro de la imagen. Por lo tanto, es posible obtener una descripción de la textura cuando el momento de orden ***s*** es evaluado. La descripción está relacionada con las respuestas en frecuencia de la base polinomial. Entonces, las características de textura ***M(s)*** basada en momentos ortogonales discretos se calcula de la siguiente manera:
+La base polinomial actúa como el filtro en la descripción basada con Momentos Ortogonales Discretos. EL valor del momento es mayor si las variaciones son similares a los valores de la base polinomial en las direcciones X y Y. Esta característica es importante para el análisis de textura porque la textura es definida como la repetición espacial de patrones en escala de gris en una región dentro de la imagen. Por lo tanto, es posible obtener una descripción de la textura cuando el momento de orden ***s*** es evaluado. La descripción está relacionada con las respuestas en frecuencia de la base polinomial. Entonces, el vector de características o **firma de textura** ***M(s)*** basada en momentos ortogonales discretos se calcula de la siguiente manera:
 
 <img src="https://latex.codecogs.com/gif.latex?M(s)&space;=&space;\sum_{s=m&plus;n}&space;|H_{mn}|,&space;\text{&space;con&space;}&space;s=0,1,&space;\ldots,&space;2N-2." title="M(s) = \sum_{s=m+n} |H_{mn}|, \text{ con } s=0,1, \ldots, 2N-1." />
 
-El cálculo de los polinomios ortogonales discretos es susceptible a la inestabilidad numérica conforme el orden aumenta. Es por ello, que se propone utilizar una descripción basada en ventanas cuadradas traslapadas que recorren la imagen, y así evitar el cálculo de polinomios y momentos de orden alto para mantener la estabilidad numérica de la descripción. Resulta evidente que el uso de las ventanas traslapadas genera una sobredescricpión de la imagen, por eso se calcula el promedio, la desviación estándar y la curtosis de los vectores obtenidos de todas las ventanas de cada imagen.
+El cálculo de los polinomios ortogonales discretos es susceptible a la inestabilidad numérica conforme el orden aumenta. Es por ello, que se propone utilizar una descripción basada en ventanas cuadradas traslapadas que recorren la imagen, y así evitar el cálculo de polinomios y momentos de orden alto para mantener la estabilidad numérica de la descripción. Resulta evidente que el uso de las ventanas traslapadas genera una sobredescricpión de la imagen, por eso se calculan **firmas estadísticas de textura** basadas en el promedio, la desviación estándar y la curtosis de los vectores obtenidos de todas las ventanas de cada imagen.
 
-El vector estadístico de textura ***t***, basado en la descripción de textura ***M(s)***, es calculado para cada ventana donde ***i*** es la posición de la ventana, que se desplaza de izquierda a derecha y de arriba hacia abajo. El vector ***t*** se contruye de la siguiente manera:
+La **firma estadística de textura** ***t***, basada en la descripción de textura ***M(s)***, es calculada para cada ventana donde ***i*** es la posición de la ventana, que se desplaza de izquierda a derecha y de arriba hacia abajo. La firma ***t*** se contruye de la siguiente manera:
 
 <img src="https://latex.codecogs.com/gif.latex?t&space;=&space;\left[&space;\mu(M_i(0)),&space;\sigma(M_i(0)),&space;\kappa&space;(M_i(0)),&space;\ldots,&space;\mu(M_i(2N-2)),&space;\sigma(M_i(2N-2)),&space;\kappa&space;(M_i(2N-2))&space;\right]," title="t = \left[ \mu(M_i(0)), \sigma(M_i(0)), \kappa (M_i(0)), \ldots, \mu(M_i(2N-2)), \sigma(M_i(2N-2)), \kappa (M_i(2N-2)) \right]," />
 
-El esquema general  de clasificación indica que se calcula una firma estadística de textura para cada imagen del conjunto de entrenamiento. Una vez calculadas las características, entran al clasificador que se encargará de generar una regla con la que posteriormente las características calculadas para el conjunto de validación serán clasificadas. En la siguiente figura se muestra el esquema general de la clasificación con firmas de textura estadísticas. 
+El esquema general  de clasificación indica que se calcula una firma estadística de textura para cada imagen del conjunto de entrenamiento. Las firmas entran al clasificador que se encargará de generar una regla con la que posteriormente las características calculadas para el conjunto de validación serán clasificadas. En la siguiente figura se muestra el esquema general de la clasificación con firmas de textura estadísticas. 
 
 ![](images/texturaestadisticas.png) 
 
@@ -119,10 +119,10 @@ Después de calcular los vectores de textura de cada ventana, en el programa **C
  
 Estos vectores estadísticos de características se calculan para cada base polinomial y se almacenan en los archivos:
 
- - **Lymphoma_CaracteristicasS.mat**
- - **Lymphoma_CaracteristicasT.mat**
- - **Lymphoma_CaracteristicasK.mat**
- - **Lymphoma_CaracteristicasD.mat**
+ - **Lymphoma_CaracteristicasS.mat**: basados en los polinomios de Shmaliy.
+ - **Lymphoma_CaracteristicasT.mat**: basados en los polinomios de Tchebichef.
+ - **Lymphoma_CaracteristicasK.mat**: basados en los polinomios de Krawtchouk.
+ - **Lymphoma_CaracteristicasD.mat**: basados en los polinomios dual Hahn.
  
  ### Clasificación de la base de datos
  
@@ -130,11 +130,18 @@ Estos vectores estadísticos de características se calculan para cada base poli
  
  - **Familias de Momentos Discretos:** Los vectores característicos de textura  se calculan a partir de las bases polinomiales discretas de Shmaliy, Tchebichef, Krawtchouk y dual Hahn.
 
- - **Tamaño de ventana de análisis:** los tamaños de las ventanas de análisis para calcular las firmas estadísticas de textura son 20x20, 30x30, 40x40 y 50x50 pixeles. Este tamaño está limitado por que el cálculo de los polinomios dual Hahn es inestable a partir de ese tamaño. Esa inestabilidad se debe a la acumulación del error en las recursiones, tal y como se mencionó anteriormente. Por lo tanto, el tamaño de la ventana se limita para todas las familias de polinomios para comparar los resultados de las cuatro bases polinomiales bajo las mismas condiciones.
+ - **Tamaño de ventana de análisis:** los tamaños de las ventanas de análisis para calcular las firmas estadísticas de textura son 20x20, 30x30, 40x40 y 50x50 pixeles. Este tamaño está limitado porque el cálculo de los polinomios dual Hahn es inestable a partir de de ventana de 50x50. Esa inestabilidad se debe a la acumulación del error en las recursiones, tal y como se mencionó anteriormente. Por lo tanto, el tamaño de la ventana se limita para todas las familias de polinomios con el fin de comparar los resultados de las cuatro bases polinomiales bajo las mismas condiciones.
 
- - **Procesamiento de las firmas de textura:** Antes de que las firmas de textura estadística entren a los clasificadores se les aplica el siguiente tratamiento: Análisis Discriminante Lineal (*LDA*), eliminación recursiva de caracterísiticas y la combinación de ambas, eliminación recursiva y *LDA*. Evidentemente, las pruebas también se realizaron sobre las firmas estadísticas sin tratamiento alguno.
+ - **Procesamiento de las firmas de textura:** Antes de que las firmas de textura estadística entren a los clasificadores se les aplica el siguiente tratamiento: Análisis Discriminante Lineal (*LDA*), selección recursiva de características y la combinación de ambas (selección recursiva y *LDA*, en ese orden). Evidentemente, las pruebas también se realizaron sobre las firmas estadísticas sin tratamiento alguno.
 
  - **Clasificadores:** Los algoritmos de clasificación utilizados son: $K$ vecinos más cercanos (*kNN*), máquina de soporte vectorial con kernel lineal (*SVM* lineal) y con kernel Gaussiano (*SVM* gauss), *Random Forest* y *naive* Bayes.
 
+**Ahora, cabe mencionar que toda la parte de descripción de textura basada en momentos ortogonales discretos está desarrollada en MATLAB. Mientras que, la parte de procesamiento de las firmas de textura y la clasificación a través de los métodos antes mencionados fue escrita en Python utilizando librerías como: Numpy, Scipy y Sci-kit learn.**
+
+El procesamiento de las firmas y clasificación se puede encontrar en los siguientes programas:
+ - **ClasificacionFinal_Lymphoma_ver2.py:** clasifica las firmas de cada base polinomial sin ningún tipo de procesamiento.
+ - **ClasificacionLDAFinal_Lymphoma_ver2.py:** clasifica las firmas de cada base polinomial con *LDA*.
+ - **ClasificacionLDAFinal_Lymphoma_ver2.py:** clasifica las firmas de cada base polinomial selección de características.
+ - **ClasificacionLDASelCarRFFinal_Lymphoma_ver2.py:** clasifica las firmas de cada base polinomial con selección de características y *LDA*.
 
  
