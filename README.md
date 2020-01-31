@@ -1,5 +1,5 @@
 # Aplicaciones de los Momentos Ortogonales
-En esta carpeta se incluye un ejemplo de cómo utilizar diferentes familias de momentos ortogonales discretos como descriptores de textura en imágenes. Con dichos descriptores se generarán vectores de características que funcionarán para realizar la clasificación de imágenes dentro de una base de datos. Este trabajo fue publicado con el título [*A Comparative Study on Discrete Shmaliy Moments and Their Texture-Based Applications*](https://www.hindawi.com/journals/mpe/2018/1673283/) y en la Tesis Doctoral [*Descripción y clasificación de texturas basada en polinomios ortogonales discretos.*](http://132.248.9.195/ptd2018/septiembre/0780559/Index.html)
+En esta carpeta se incluye un ejemplo de cómo utilizar diferentes familias de momentos ortogonales discretos como descriptores de textura en imágenes. Con dichos descriptores se generarán vectores de características que funcionarán para realizar la clasificación de imágenes dentro de una base de datos. Este trabajo fue publicado con el título [*A Comparative Study on Discrete Shmaliy Moments and Their Texture-Based Applications*](https://www.hindawi.com/journals/mpe/2018/1673283/) y en la Tesis Doctoral [*Descripción y clasificación de texturas basada en polinomios ortogonales discretos.*](http://132.248.9.195/ptd2018/septiembre/0780559/Index.html).  **La base de datos se puede descargar en el siguiente [enlace](https://mega.nz/#!pxxlGShS!NXQEW3HHNmtWP9jkcnwhmmYVR7-tBSrjDCdEM6W5Lds).**
 
 ## Momentos ortogonales discretos
 Los momentos discretos son cantidades escalares que se usan para caracterizar una función (imagen) a través del cálculo de atributos significativos de ella. Matemáticamente, el momento Mpq de una Imagen ***I(x,y)*** es la proyección de la imagen sobre una base polinomial bidimensional ***r_pq*** y se define como:
@@ -67,6 +67,15 @@ donde ***Bk(x)*** es el polinomio de Bernoulli y ***Bk(0)*** es el número de Be
 
 <img src="https://latex.codecogs.com/gif.latex?h_p&space;(n,N)&space;=&space;\sum_{i=0}^{p}&space;(-1)^i&space;\frac{M_{(i&plus;1),1}^{(p)}&space;(N)}{\vert&space;H_p&space;(N)&space;\vert}&space;n^i." title="h_p (n,N) = \sum_{i=0}^{p} (-1)^i \frac{M_{(i+1),1}^{(p)} (N)}{\vert H_p (N) \vert} n^i." />
 
+## Implementación de los polinomios ortogonales
+
+La implementación de todas las bases polinomiales es de forma recursiva y se encuentran en la carpeta ***MomentosOrtogonalesD*** en los programas:
+
+ - **generarPolyShmaliy.m** para polinomios de Shmaliy.
+ - **computePolyMatrix.m** para polinomios de Tchebichef.
+ - **generarPolyKraw.m** para polinomios de Krawtchouk.
+ - **generarPolyDHahn.m** para polinomios de dual Hahn.
+
 ## Descripción de textura con momentos ortogonales discretos
 
 La base polinomial actúa como el filtro en la descripción basada con Momentos Ortogonales Discretos. EL valor del momento es mayor si las variaciones son similares a los valores de la base polinomial en las direcciones X y Y. Esta característica es importante para el análisis de textura porque la textura es definida como la repetición espacial de patrones en escala de gris en una región dentro de la imagen. Por lo tanto, es posible obtener una descripción de la textura cuando el momento de orden ***s*** es evaluado. La descripción está relacionada con las respuestas en frecuencia de la base polinomial. Entonces, el vector de características o **firma de textura** ***M(s)*** basada en momentos ortogonales discretos se calcula de la siguiente manera:
@@ -93,8 +102,7 @@ La base de datos de prueba se llama ***Lymphoma*** y pertenece al benchmark [IIC
  - **Linfoma folicular (FL)** con 139 muestras.
  - **Linfoma de células del manto (MCL)** con 122 muestras.
 
-La siguiente figura contiene muestras de cada clase de la base de datos. Cabe resaltar que las imágenes originales fueron escaladas a la mitad y transformadas a escala de grises. **La base de datos se puede descargar en el siguiente [enlace](https://mega.nz/#!pxxlGShS!NXQEW3HHNmtWP9jkcnwhmmYVR7-tBSrjDCdEM6W5Lds).**
-
+La siguiente figura contiene muestras de cada clase de la base de datos. Cabe resaltar que las imágenes originales fueron escaladas a la mitad y transformadas a escala de grises.
 ![Clases de la base de datos Lymphoma: (a)CLL, (b)FL y (c)MCL.](images/hematologic1.png)
 
 ## Descripción de los programas
