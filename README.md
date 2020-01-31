@@ -98,9 +98,9 @@ El esquema general  de clasificación indica que se calcula una firma estadísti
 
 La base de datos de prueba se llama ***Lymphoma*** y pertenece al benchmark [IICBU-2008](https://ome.grc.nia.nih.gov/iicbu2008/). Esta base de datos está compuesta por tres tipos de enfermedades hematológicas:
 
- - **Leucemia linfocítica crónica (CLL)** con 133 muestras. 
- - **Linfoma folicular (FL)** con 139 muestras.
- - **Linfoma de células del manto (MCL)** con 122 muestras.
+ a. **Leucemia linfocítica crónica (CLL)** con 133 muestras. 
+ b. **Linfoma folicular (FL)** con 139 muestras.
+ c. **Linfoma de células del manto (MCL)** con 122 muestras.
 
 La siguiente figura contiene muestras de cada clase de la base de datos. Cabe resaltar que las imágenes originales fueron escaladas a la mitad y transformadas a escala de grises.
 ![Clases de la base de datos Lymphoma: (a)CLL, (b)FL y (c)MCL.](images/hematologic1.png)
